@@ -1,0 +1,80 @@
+package eu.astound.promguide;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
+import eu.astound.promguide.AsyncImageDownloader;
+
+public class PromGuideDetailActivity extends Activity{
+	public static String PROM_ID = "eu.astound.promguide.PromGuideDetailActivity.PROM_ID";
+	public static String PROM_LIST = "eu.astound.promguide.PromGuideDetailActivity.PROM_LIST";
+	private PromList promList;
+	
+	private URL promImageURL;
+	@Override
+	public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        setContentView(R.layout.guide_detail);
+        
+        TextView promName = (TextView) findViewById(R.id.promName);
+        TextView promDay = (TextView) findViewById(R.id.promDay);
+        TextView promMonth = (TextView) findViewById(R.id.promMonth);
+        TextView promYear = (TextView) findViewById(R.id.promYear);
+        ImageView promImage = (ImageView) findViewById(R.id.promImage);
+        
+        Integer promID = getIntent().getIntExtra(PROM_ID, 0);
+        Bundle b = getIntent().getBundleExtra(PROM_LIST);
+        this.promList = b.getParcelable("promslist");
+        Prom thisProm = promList.get(promID.intValue());
+        promName.setText(thisProm.getName());
+        
+        promDay.setText(thisProm.getDay());
+        promMonth.setText(thisProm.getMonth());
+        promYear.setText(thisProm.getYear());
+        
+        promDay.setPadding(5, 0, 5, 0);
+        promMonth.setPadding(5,0,5,0);
+        promYear.setPadding(5, 0, 5, 0);
+        
+        try{
+        	promImage.setImageBitmap(getBitmapFromURL(thisProm.getImageURL()));	
+        } catch (Exception e){
+        	Log.d("SPEE",e.getMessage());
+        	
+        	/*StringWriter sw = new StringWriter();
+        	PrintWriter pw = new PrintWriter(sw);
+        	e.printStackTrace(pw);
+        	Log.d("SPEE",sw.toString());*/
+        }
+        
+
+	
+}
+public static Bitmap getBitmapFromURL(String src) {
+	    try {
+	        URL url = new URL(src);
+	        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	        connection.setDoInput(true);
+	        connection.connect();
+	        InputStream input = connection.getInputStream();
+	        Bitmap myBitmap = BitmapFactory.decodeStream(input);
+	        return myBitmap;
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+}
+	

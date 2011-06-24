@@ -1,0 +1,24 @@
+package eu.astound.promguide;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
+public class AsyncImageDownloader extends AsyncTask<URL, void,void>  {
+protected ImageDownloader bgTask;
+public AsyncImageDownloader (){
+	this.bgTask = new ImageDownloader();
+}
+
+protected Long doInBackground(URL imgURL) {
+	this.bgTask.fetchImage(imgURL);
+    
+}
+
+}

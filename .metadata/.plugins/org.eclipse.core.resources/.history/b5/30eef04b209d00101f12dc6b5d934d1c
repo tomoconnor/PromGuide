@@ -1,0 +1,12 @@
+package eu.astound.promguide;
+import java.util.ArrayList;
+import eu.astound.promguide.Prom;
+
+
+import android.os.Parcel;
+ 
+import android.os.Parcelable;
+ 
+public class PromList extends ArrayList<Prom> implements Parcelable {
+
+}

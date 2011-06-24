@@ -1,27 +1,25 @@
 package eu.astound.promguide;
 
-import android.os.Bundle;
-import android.widget.ListView;
-import android.app.ListActivity;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.view.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import android.app.ListActivity;
 import android.content.Intent;
-import eu.astound.promguide.PromList;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 public class PromGuideActivity extends ListActivity{
 	//public ArrayList promList;
     public PromList promList;

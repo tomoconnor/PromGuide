@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_height="-1" android:id="@+id/llGuide" android:orientation="vertical" android:layout_width="fill_parent">
+    <TextView android:layout_width="wrap_content" android:text="TextView" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/promName"></TextView>
+    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout2" android:layout_width="fill_parent">
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/icon" android:id="@+id/promImage"></ImageView>
+        <Button android:text="Button" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/promWebLink"></Button>
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="fill_parent">
+        <TextView android:layout_height="wrap_content" android:text="TextView" android:id="@+id/promDay" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content"></TextView>
+        <TextView android:layout_height="wrap_content" android:text="TextView" android:id="@+id/promMonth" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content"></TextView>
+        <TextView android:layout_height="wrap_content" android:text="TextView" android:id="@+id/promYear" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content"></TextView>
+    </LinearLayout>
+    <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TextView" android:id="@+id/promDescription"></TextView>
+    
+</LinearLayout>

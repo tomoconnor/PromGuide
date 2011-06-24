@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 
 public class PromPersonGuideActivity extends Activity{
 	public static String PERSON_GUIDE_ID = "eu.astound.promguide.PromPersonGuideActivity.PERSON_GUIDE_ID";

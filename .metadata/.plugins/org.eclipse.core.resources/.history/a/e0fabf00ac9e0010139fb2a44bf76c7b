@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, PromGuideActivity!</string>
+    <string name="app_name">PromGuide</string>
+    <string name="txtGuide">Unofficial BBC Proms Guide</string>
+</resources>
