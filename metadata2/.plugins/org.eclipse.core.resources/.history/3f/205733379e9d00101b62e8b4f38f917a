@@ -1,0 +1,15 @@
+package eu.astound.promguide;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class PromPersonGuideActivity extends Activity{
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	  super.onCreate(savedInstanceState);
+	  setContentView(R.layout.person_guide);
+	  
+	}
+	
+}

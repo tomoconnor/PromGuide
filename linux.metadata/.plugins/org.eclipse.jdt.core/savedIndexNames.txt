@@ -1,0 +1,2 @@
+INDEX VERSION 1.126+/home/tom/Dropbox/workspace-windows/.metadata/.plugins/org.eclipse.jdt.core
+3306346516.index

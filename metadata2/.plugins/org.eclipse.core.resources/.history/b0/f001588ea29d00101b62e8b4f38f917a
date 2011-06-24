@@ -1,0 +1,22 @@
+package eu.astound.promguide;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class PromPersonGuideActivity extends Activity{
+	public static String PERSON_GUIDE_ID = "eu.astound.promguide.PromPersonGuideActivity.PERSON_GUIDE_ID";
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	  super.onCreate(savedInstanceState);
+	  setContentView(R.layout.person_guide);
+	  String guideIdentifier = getIntent().getStringExtra(PERSON_GUIDE_ID);
+	  
+	  TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
+	  txtTitle.setText(guideIdentifier + " List");
+	  
+	}
+	
+}

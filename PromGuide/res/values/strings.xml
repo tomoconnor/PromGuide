@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, PromGuideActivity!</string>
+    <string name="app_name">PromGuide</string>
+    <string name="txtGuide">Unofficial BBC Proms Guide</string>
+    <string name="description">Unofficial BBC Proms Guide App</string>
+    <string name="version_id">0.3</string>
+</resources>

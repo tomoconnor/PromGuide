@@ -1,0 +1,80 @@
+package eu.astound.promguide;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class PromPersonGuideActivity extends Activity{
+	public static String PERSON_GUIDE_ID = "eu.astound.promguide.PromPersonGuideActivity.PERSON_GUIDE_ID";
+	private PersonList thisList;
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	  super.onCreate(savedInstanceState);
+	  setContentView(R.layout.person_guide);
+	  String guideIdentifier = getIntent().getStringExtra(PERSON_GUIDE_ID);
+	  
+	  TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
+	  txtTitle.setText(guideIdentifier + " List");
+	  this.thisList = this.fetchPersonList(guideIdentifier);
+	  
+	}
+	
+	
+	public PersonList fetchPersonList(String tag){
+		PersonList listItems = new PersonList();
+		try {
+			URL guideURL;
+
+				if(tag == "composer"){
+					guideURL = new URL("http://www.twinhelix.org/media/composers.json");
+				}else{
+					guideURL = new URL("http://www.twinhelix.org/media/performers.json");
+				}
+				URLConnection pg = guideURL.openConnection();
+				BufferedReader in = new BufferedReader(new InputStreamReader(pg.getInputStream()));
+				
+					
+				String jsonblock = "";
+				
+				String line;
+				while ((line = in.readLine())!= null){
+					jsonblock += line;
+				}
+				JSONTokener jtok = new JSONTokener(jsonblock);
+				JSONObject jo = new JSONObject(jtok);
+				JSONArray artists = (JSONArray) jo.get("artists");
+				
+				for (int i=0; i < artists.length(); i++){
+					JSONObject xartist = (JSONObject) artists.get(i);
+					Person p = new Person(xartist.getString("name"),xartist.getString("url"));
+					listItems.add(p);
+				}
+				
+		}catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	return listItems;
+	}
+	
+}

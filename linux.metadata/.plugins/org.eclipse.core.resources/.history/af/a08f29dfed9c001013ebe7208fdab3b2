@@ -1,0 +1,19 @@
+package eu.astound.promguide;
+
+public class Prom {
+	public String name;
+	public String month;
+	public String day;
+	public String year;
+	public String imageURL;
+	public String dataURL;
+	
+	public Prom(String _name, String _month, String _day, String _year, String _imageURL, String _dataURL){
+		name = _name;
+		month = _month;
+		day =_day;
+		year = _year;
+		imageURL = _imageURL;
+		dataURL = _dataURL;
+	}
+}
