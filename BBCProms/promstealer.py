@@ -6,6 +6,8 @@ import pprint
 import simplejson
 import datetime
 import codecs
+import sys
+import re
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -30,7 +32,36 @@ class Prom(object):
 		self.description = ""
 	def setDescription(self,desc):
 		self.description = desc;
+	def setStart(self,start):
+		self.starttime = start
+	def setEnd(self,end):
+		self.endtime = end
+	def setPriceRange(self,pr):
+		self.pricerange = pr
 
+        def setExtraInfo(self):
+                q = urllib2.urlopen(self.url)
+                soup = BS(q)
+                perfs = soup.find('div', {'id':'event_performances'})
+		# 7.00pm  &ndash; c. 9.15pm
+		timematch = re.compile(r'(?P<start>\d?\d\.\d{2}(a|p)m)\s+\&ndash;\s+(c.)?\s(?P<end>\d?\d\.\d{2}(a|p)m)',re.U|re.I)
+		timematch = re.compile(r'(\d?\d\.\d{2}(a|p)m)\s+\&ndash;\s+(c.)?\s(\d?\d\.\d{2}(a|p)m)')
+
+                perf = perfs.find('h2')
+		for bee in range(0,len(perf.contents)):
+			if "am" in perf.contents[bee] or "pm" in perf.contents[bee]:
+				break
+		
+		timeline = unicode(perf.contents[bee])
+#		print timeline
+
+		mo = timematch.search(timeline)
+		if mo:
+#			pp.pprint(mo.groups())
+			#(u'7.30pm', u'p', u'c.', u'9.45pm', u'p')
+			self.setStart(mo.group(0))
+			self.setEnd(mo.group(3))
+		
 	def __repr__(self):
 		return "%s: %s-%s\t[%s\t%s]" % (self.name, self.month,self.day,self.url,self.img)
 	def json(self):
@@ -63,6 +94,13 @@ for month in prom_dates.keys():
 					tmprom = Prom(pname,pmonth,pday,puri,pimg)
 					tmprom.setDescription(pdesc)
 					prom_by_month[month].append(tmprom)
+
+
+for m in prom_by_month.keys():
+	for p in prom_by_month[m]:
+		p.setExtraInfo()
+
+sys.exit(0)
 
 outfile = codecs.open("proms.json","w","utf-8")
 
